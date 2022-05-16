@@ -25,13 +25,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $conn->prepare($sql);
     $stmt->execute([$_POST["uname"]]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $new= false;
     if ($user == null) {
         $sql = " INSERT INTO `users`( username) VALUES (?);";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$_POST["uname"]]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user == null) {
-            $genErr = "Duplicate entry";
+            $genErr = "You have been registered. Please sign in again to confirm your account";
+            $new=true;
         }
     }
     if ($_POST['psw'] == $API_key && $genErr == null) {
@@ -41,6 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location:show.php');
     } else {
         $pswErr = "Wrong password. Try again.";
+        if($new==true){
+            $pswErr = "Insert your password";
+        }
         //header('Location:show.php');
     }
 }
@@ -82,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // exec('octave-cli --eval "pkg load control;m1 = 2500; m2 = 320;k1 = 80000; k2 = 500000;b1 = 350; b2 = 15020;A=[0 1 0 0;-(b1*b2)/(m1*m2) 0 ((b1/m1)*((b1/m1)+(b1/m2)+(b2/m2)))-(k1/m1) -(b1/m1);b2/m2 0 -((b1/m1)+(b1/m2)+(b2/m2)) 1;k2/m2 0 -((k1/m1)+(k1/m2)+(k2/m2)) 0];B=[0 0;1/m1 (b1*b2)/(m1*m2);0 -(b2/m2);(1/m1)+(1/m2) -(k2/m2)];C=[0 0 1 0]; D=[0 0];Aa = [[A,[0 0 0 0]\'];[C, 0]];Ba = [B;[0 0]];Ca = [C,0]; Da = D;K = [0 2.3e6 5e8 0 8e6];sys = ss(Aa-Ba(:,1)*K,Ba,Ca,Da);t = 0:0.01:5;r =0.1;initX1=0; initX1d=0;initX2=0; initX2d=0;[y,t,x]=lsim(sys*[0;1],r*ones(size(t)),t,[initX1;initX1d;initX2;initX2d;0]);save out.txt y"', $output);
         exec('octave-cli --eval "pkg load control;m1 = 2500; m2 = 320;k1 = 80000; k2 = 500000;b1 = 350; b2 = 15020;A=[0 1 0 0;-(b1*b2)/(m1*m2) 0 ((b1/m1)*((b1/m1)+(b1/m2)+(b2/m2)))-(k1/m1) -(b1/m1);b2/m2 0 -((b1/m1)+(b1/m2)+(b2/m2)) 1;k2/m2 0 -((k1/m1)+(k1/m2)+(k2/m2)) 0];B=[0 0;1/m1 (b1*b2)/(m1*m2);0 -(b2/m2);(1/m1)+(1/m2) -(k2/m2)];C=[0 0 1 0]; D=[0 0];Aa = [[A,[0 0 0 0]\'];[C, 0]];Ba = [B;[0 0]];Ca = [C,0]; Da = D;K = [0 2.3e6 5e8 0 8e6];sys = ss(Aa-Ba(:,1)*K,Ba,Ca,Da);t = 0:0.01:5;r =0.1;initX1=0; initX1d=0;initX2=0; initX2d=0;[y,t,x]=lsim(sys*[0;1],r*ones(size(t)),t,[initX1;initX1d;initX2;initX2d;0]);y"', $output);
 
-        var_dump($output);
+       // var_dump($output);
         ?>
     </div>
     <!-- Optional JavaScript -->
