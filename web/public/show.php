@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'language.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -19,104 +19,115 @@ try {
 $Err = "Saved successfully";
 ###################################################################
 if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-    
-        ###################################################################
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            // exec('octave-cli --eval "pkg load control;m1 = 2500; m2 = 320;k1 = 80000; k2 = 500000;b1 = 350; b2 = 15020;A=[0 1 0 0;-(b1*b2)/(m1*m2) 0 ((b1/m1)*((b1/m1)+(b1/m2)+(b2/m2)))-(k1/m1) -(b1/m1);b2/m2 0 -((b1/m1)+(b1/m2)+(b2/m2)) 1;k2/m2 0 -((k1/m1)+(k1/m2)+(k2/m2)) 0];B=[0 0;1/m1 (b1*b2)/(m1*m2);0 -(b2/m2);(1/m1)+(1/m2) -(k2/m2)];C=[0 0 1 0]; D=[0 0];Aa = [[A,[0 0 0 0]\'];[C, 0]];Ba = [B;[0 0]];Ca = [C,0]; Da = D;K = [0 2.3e6 5e8 0 8e6];sys = ss(Aa-Ba(:,1)*K,Ba,Ca,Da);t = 0:0.01:5;r =0.1;initX1=0; initX1d=0;initX2=0; initX2d=0;[y,t,x]=lsim(sys*[0;1],r*ones(size(t)),t,[initX1;initX1d;initX2;initX2d;0]);save out.txt y"', $output);
-            //exec('octave-cli --eval "pkg load control;m1 = 2500; m2 = 320;k1 = 80000; k2 = 500000;b1 = 350; b2 = 15020;A=[0 1 0 0;-(b1*b2)/(m1*m2) 0 ((b1/m1)*((b1/m1)+(b1/m2)+(b2/m2)))-(k1/m1) -(b1/m1);b2/m2 0 -((b1/m1)+(b1/m2)+(b2/m2)) 1;k2/m2 0 -((k1/m1)+(k1/m2)+(k2/m2)) 0];B=[0 0;1/m1 (b1*b2)/(m1*m2);0 -(b2/m2);(1/m1)+(1/m2) -(k2/m2)];C=[0 0 1 0]; D=[0 0];Aa = [[A,[0 0 0 0]\'];[C, 0]];Ba = [B;[0 0]];Ca = [C,0]; Da = D;K = [0 2.3e6 5e8 0 8e6];sys = ss(Aa-Ba(:,1)*K,Ba,Ca,Da);t = 0:0.01:5;r =0.1;initX1=0; initX1d=0;initX2=0; initX2d=0;[y,t,x]=lsim(sys*[0;1],r*ones(size(t)),t,[initX1;initX1d;initX2;initX2d;0]);y"', $output);
-            exec('octave-cli --eval "pkg load control;' . $_POST['input'] . 'save out.txt x"', $output);
-            exec('octave-cli --eval "pkg load control;' . $_POST['input'] . 'save out1.txt y"', $output);
-            exec('octave-cli --eval "pkg load control;' . $_POST['input'] . 'save out2.txt t"', $output);
+    ###################################################################
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        // exec('octave-cli --eval "pkg load control;m1 = 2500; m2 = 320;k1 = 80000; k2 = 500000;b1 = 350; b2 = 15020;A=[0 1 0 0;-(b1*b2)/(m1*m2) 0 ((b1/m1)*((b1/m1)+(b1/m2)+(b2/m2)))-(k1/m1) -(b1/m1);b2/m2 0 -((b1/m1)+(b1/m2)+(b2/m2)) 1;k2/m2 0 -((k1/m1)+(k1/m2)+(k2/m2)) 0];B=[0 0;1/m1 (b1*b2)/(m1*m2);0 -(b2/m2);(1/m1)+(1/m2) -(k2/m2)];C=[0 0 1 0]; D=[0 0];Aa = [[A,[0 0 0 0]\'];[C, 0]];Ba = [B;[0 0]];Ca = [C,0]; Da = D;K = [0 2.3e6 5e8 0 8e6];sys = ss(Aa-Ba(:,1)*K,Ba,Ca,Da);t = 0:0.01:5;r =0.1;initX1=0; initX1d=0;initX2=0; initX2d=0;[y,t,x]=lsim(sys*[0;1],r*ones(size(t)),t,[initX1;initX1d;initX2;initX2d;0]);save out.txt y"', $output);
+        //exec('octave-cli --eval "pkg load control;m1 = 2500; m2 = 320;k1 = 80000; k2 = 500000;b1 = 350; b2 = 15020;A=[0 1 0 0;-(b1*b2)/(m1*m2) 0 ((b1/m1)*((b1/m1)+(b1/m2)+(b2/m2)))-(k1/m1) -(b1/m1);b2/m2 0 -((b1/m1)+(b1/m2)+(b2/m2)) 1;k2/m2 0 -((k1/m1)+(k1/m2)+(k2/m2)) 0];B=[0 0;1/m1 (b1*b2)/(m1*m2);0 -(b2/m2);(1/m1)+(1/m2) -(k2/m2)];C=[0 0 1 0]; D=[0 0];Aa = [[A,[0 0 0 0]\'];[C, 0]];Ba = [B;[0 0]];Ca = [C,0]; Da = D;K = [0 2.3e6 5e8 0 8e6];sys = ss(Aa-Ba(:,1)*K,Ba,Ca,Da);t = 0:0.01:5;r =0.1;initX1=0; initX1d=0;initX2=0; initX2d=0;[y,t,x]=lsim(sys*[0;1],r*ones(size(t)),t,[initX1;initX1d;initX2;initX2d;0]);y"', $output);
+        exec('octave-cli --eval "pkg load control;' . $_POST['input'] . 'save out.txt x"', $output);
+        exec('octave-cli --eval "pkg load control;' . $_POST['input'] . 'save out1.txt y"', $output);
+        exec('octave-cli --eval "pkg load control;' . $_POST['input'] . 'save out2.txt t"', $output);
 
 
 
-            $sql = " INSERT INTO `orders`( user_id,date_date,text_text) VALUES (?,?,?);";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$_SESSION['id'], date('Y-m-d H:i:s'), $_POST['input']]);
-        }
+        $sql = " INSERT INTO `orders`( user_id,date_date,text_text) VALUES (?,?,?);";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$_SESSION['id'], date('Y-m-d H:i:s'), $_POST['input']]);
+    }
 
 ?>
-        <!doctype html>
-        <html lang="en">
+    <!doctype html>
+    <html lang="en">
 
-        <head>
-            <title>Gallery</title>
-            <!-- Required meta tags -->
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <title><?php echo $lang['title']; ?></title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-            <link rel="stylesheet" href="style.css">
-            <!-- Bootstrap CSS -->
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        </head>
+        <link rel="stylesheet" href="style.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
 
-        <body class="p-3 mb-2 bg-dark text-white">
+    <body class="p-3 mb-2 bg-dark text-white">
 
-            <div class="container">
-                <h1 class="text-center ">Final project template</h1>
-                <h2 class="text-right small">Signed in : <?php echo " " . $_SESSION['username']; ?></h2>
-                <form action="show.php" method="post">
-                    <div class="container">
-
-                        <label for="input"><b>Input</b></label>
-                        <textarea class="form-control" id="input" name="input" rows="7"></textarea>
-
-                        <br> <br>
-                        <button  type="submit">Send</button>
-                        <?php
-                        // $_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
-                        ?>
-                    </div>
-
-                </form>
+        <div class="container">
+            <h1 class="text-center "><?php echo $lang['title']; ?></h1>
+            <h2 class="text-right small"><?php echo $lang['signed']; ?> <?php echo " " . $_SESSION['username']; ?></h2>
+            <form action="show.php" method="post">
                 <div class="container">
-                    <textarea class="form-control" type="text" id="output" name="output" readonly rows="7"><?php
-                                                                                                            $txt_file = fopen('out1.txt', 'r');
-                                                                                                            $a = 1;
-                                                                                                            while ($line = fgets($txt_file)) {
-                                                                                                                echo $line;
-                                                                                                                $a++;
-                                                                                                            }
-                                                                                                            fclose($txt_file);
-                                                                                                            //$fh = fopen('out2.txt', 'w');
-                                                                                                            //fclose($fh);
-                                                                                                            if ($output != null) {
-                                                                                                                // for($i=0;$i<$output.size();$i++){
 
-                                                                                                                echo ($output[0]);
-                                                                                                                //echo($output[$i]);
-                                                                                                                // }
-                                                                                                            }
-                                                                                                            ?>
-                                                                                                    </textarea>
+                    <label for="input"><b><?php echo $lang['input']; ?></b></label>
+                    <textarea class="form-control" id="input" name="input" rows="7"></textarea>
+
+                    <br> <br>
+                    <button type="submit"><?php echo $lang['send']; ?></button>
+                    <?php
+                    // $_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
+                    ?>
                 </div>
-                <?php
-                //var_dump($output);
-                ?>
-            </div>
+
+            </form>
             <div class="container">
-                <div class="mybtn-right">
-                    <a href="logout.php"  class="btn btn-primary">Log out</a>
+                <textarea class="form-control" type="text" id="output" name="output" readonly rows="7"><?php
+                                                                                                        $txt_file = fopen('out1.txt', 'r');
+                                                                                                        $a = 1;
+                                                                                                        while ($line = fgets($txt_file)) {
+                                                                                                            echo $line;
+                                                                                                            $a++;
+                                                                                                        }
+                                                                                                        fclose($txt_file);
+                                                                                                        //$fh = fopen('out2.txt', 'w');
+                                                                                                        //fclose($fh);
+                                                                                                        if ($output != null) {
+                                                                                                            // for($i=0;$i<$output.size();$i++){
 
-                </div>
+                                                                                                            echo ($output[0]);
+                                                                                                            //echo($output[$i]);
+                                                                                                            // }
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                    </textarea>
             </div>
+            <?php
+            //var_dump($output);
+            ?>
+        </div>
+        <div class="container">
+            <div class="mybtn-right">
+                <a href="logout.php?lang.<?php echo $_SESSION['lang'];?>." class="btn btn-primary"><?php echo $lang['logout']; ?></a>
+
+            </div>
+        </div>
 
 
-            <!-- Optional JavaScript -->
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        </body>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <footer class="bg-dark text-center text-lg-start">
+            <!-- Copyright -->
+            <div class="container">
+                <a href="show.php?lang=en"><?php echo $lang['lang_en']; ?></a>|
+                <a href="show.php?lang=sk"><?php echo $lang['lang_sk']; ?></a>
+            </div>
+            <div class="text-center p-3">
+                © 2022 Copyright: Andrašovič, Baranec, Brosman, Teplanský
 
-        </html>
+            </div>
+            <!-- Copyright -->
+        </footer>
+    </body>
 
-    <?php
-        ##############################################
-    }
- else {
-   header('Location:index.php');
+    </html>
+
+<?php
+    ##############################################
+} else {
+    header('Location:index.php');
 }
 
 ##############################################

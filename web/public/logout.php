@@ -1,7 +1,7 @@
 <?php
 
 
-session_start();
+include 'language.php';
 
 
 if (session_destroy()) {
@@ -12,7 +12,7 @@ if (session_destroy()) {
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title><?php echo $lang['title']; ?></title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,9 +25,9 @@ if (session_destroy()) {
   <br><br><br>
   <Div class="container">
 
-    <h1>You were logged out.</h1>
+    <h1><?php echo $lang['loggedout']; ?></h1>
     <br>
-    <a href="index.php"  class="btn btn-primary">Back to Log in</a>
+    <a href="index.php"  class="btn btn-primary"><?php echo $lang['backtologin']; ?></a>
 
   </Div>
 
@@ -38,6 +38,18 @@ if (session_destroy()) {
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <footer class="bg-dark text-center text-lg-start">
+            <!-- Copyright -->
+            <div class="container">
+                <a href="logout.php?lang=en"><?php echo $lang['lang_en']; ?></a>|
+                <a href="logout.php?lang=sk"><?php echo $lang['lang_sk']; ?></a>
+            </div>
+            <div class="text-center p-3">
+                © 2022 Copyright: Andrašovič, Baranec, Brosman, Teplanský
+
+            </div>
+            <!-- Copyright -->
+        </footer>
 </body>
 
 </html>
