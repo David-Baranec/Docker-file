@@ -16,7 +16,6 @@ try {
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
-
 $pswErr = '';
 $genErr = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -39,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['psw'] == $API_key && $genErr == null) {
         $_SESSION['username'] = $user['username'];
         $_SESSION['id'] = $user['id'];
-        $_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
+        $_SESSION['previous'] = 'index.php';
         header('Location:show.php');
     } else {
         $pswErr = "Wrong password. Try again.";

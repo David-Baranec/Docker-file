@@ -18,10 +18,8 @@ try {
 }
 $Err = "Saved successfully";
 ###################################################################
-if (isset($_SESSION['previous']) && !empty($_SESSION['previous'])) {
-    if (basename($_SERVER['PHP_SELF']) != $_SESSION['previous']) {
-        session_destroy();
-        //header('Location:index.php');
+if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+    
         ###################################################################
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -65,7 +63,10 @@ if (isset($_SESSION['previous']) && !empty($_SESSION['previous'])) {
                         <textarea class="form-control" id="input" name="input" rows="7"></textarea>
 
                         <br> <br>
-                        <button type="submit">Send</button>
+                        <button  type="submit">Send</button>
+                        <?php
+                        // $_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
+                        ?>
                     </div>
 
                 </form>
@@ -94,7 +95,12 @@ if (isset($_SESSION['previous']) && !empty($_SESSION['previous'])) {
                 //var_dump($output);
                 ?>
             </div>
+            <div class="container">
+                <div class="mybtn-right">
+                    <a href="logout.php"  class="btn btn-primary">Log out</a>
 
+                </div>
+            </div>
 
 
             <!-- Optional JavaScript -->
@@ -109,42 +115,9 @@ if (isset($_SESSION['previous']) && !empty($_SESSION['previous'])) {
     <?php
         ##############################################
     }
-} else {
-    ?>
-    <!doctype html>
-    <html lang="en">
-
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
-
-    <body class="p-3 mb-2 bg-dark text-white">
-        <br>
-        <h3 class="text-white text-center">You are not allowed to use this content. Please continue to log in page </h3>
-        <br>
-        <div class="container">
-            <div class="mybtn-right">
-                <a href="index.php" class="btn btn-primary">Log in page</a>
-
-            </div>
-        </div>
-
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </body>
-
-    </html>
-<?php
+ else {
+   header('Location:index.php');
 }
+
 ##############################################
 ?>
