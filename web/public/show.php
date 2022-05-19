@@ -29,6 +29,11 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         exec('octave-cli --eval "pkg load control;' . $_POST['input'] . 'save out1.txt y"', $output);
         exec('octave-cli --eval "pkg load control;' . $_POST['input'] . 'save out2.txt t"', $output);
 
+        //exec('octave-cli --eval "pkg load control;' . $_POST['input'] . '"', $output);
+        //var_dump($output);
+        //var_dump($_POST["input"]);
+
+
 
 
         $sql = " INSERT INTO `orders`( user_id,date_date,text_text) VALUES (?,?,?);";
@@ -96,10 +101,11 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
             ?>
         </div>
         <div class="container">
-            <div class="mybtn-right">
+            <div class="mybtn-right-flex">
                 <a href="logout.php?lang.<?php echo $_SESSION['lang'];?>." class="btn btn-primary"><?php echo $lang['logout']; ?></a>
-
+                <a href="export.php?lang.<?php echo $_SESSION['lang'];?>." class="btn btn-primary"><?php echo $lang['csv']; ?></a>
             </div>
+
         </div>
 
 

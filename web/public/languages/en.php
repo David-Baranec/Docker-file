@@ -17,4 +17,5 @@ $lang = array(
 'logout'=>'Log out',
 'loggedout'=>'You are logged out',
 'backtologin'=>'Back to login page',
+'csv'=>'Export CSV'
 );

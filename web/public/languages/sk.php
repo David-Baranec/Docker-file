@@ -17,4 +17,5 @@ $lang = array(
 'logout'=>'Odhlásiť',
 'loggedout'=>'Boli ste odhlásený',
 'backtologin'=>'Späť na prihlásenie',
+'csv'=>'Export CSV'
 );
